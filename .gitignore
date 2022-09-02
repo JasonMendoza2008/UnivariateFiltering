@@ -3,6 +3,16 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Manim generated files
+media/
+
+# IDE stuff
+.idea/
+
+# Script and Slides
+UnivariateFiltering.docx
+UnivariateFiltering.pptx
+
 # C extensions
 *.so
 
