@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import pandas as pd
 import statsmodels.discrete.discrete_model  # for type-hinting purposes
 import statsmodels.formula.api as smf
