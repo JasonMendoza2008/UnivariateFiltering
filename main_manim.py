@@ -3,6 +3,52 @@ from manim import *
 from create_dataframe import DataStratification, create_dataframe
 
 
+class UnivariatePreFilteringAnimation(Scene):
+    def construct(self):
+        table_list: list[Table] = []
+        for values in [
+            ["0.470", "0.811", "0.001", "0.004", "0.293", "0.013", "0.895"],
+            ["0.774", "0.001", "0.002", "0.002", "0.009", "0.918", "0.494"],
+            ["0.977", "0.001", "0.526", "0.001", "0.001", "0.947", "0.009"],
+            ["0.007", "0.912", "0.002", "0.002", "0.009", "0.001", "0.005"],
+            ["0.004", "0.001", "0.002", "0.921", "0.009", "0.913", "0.494"],
+            ["0.007", "0.001", "0.001", "0.841", "0.290", "0.011", "0.893"],
+            ["0.977", "0.991", "0.526", "0.481", "0.001", "0.947", "0.009"],
+        ]:
+            table: Table = Table(
+                [
+                    [value, str(float(value) < 0.05)]
+                    for value in values
+                ],
+                row_labels=[
+                    Text("Gender"),
+                    Text("Age"),
+                    Text("Physical Activity"),
+                    Text("Weight"),
+                    Text("Height"),
+                    Text("Bodyfat percentage"),
+                    Text("Vitamin d deficiency")
+                ],
+                col_labels=[Text("             p-value\n(univariate analysis)"), Text("Selected?")],
+            ).scale(0.5)
+
+            table_list.append(table)
+
+            if len(table_list) == 1:
+                self.play(
+                    Write(table)
+                )
+            else:
+                self.play(
+                    Transform(
+                        table_list[0],
+                        table_list[-1]
+                    )
+                )
+
+            self.wait(4)
+
+
 class HypotheticalExample(Scene):
     def construct(self):
         example_number: int
